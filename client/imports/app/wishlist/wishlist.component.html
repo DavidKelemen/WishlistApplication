@@ -1,0 +1,22 @@
+<div class="container">
+<h2>{{currentUser.name}}'s wishlist:</h2>
+<hr/>
+
+<ul data-wishlist *ngIf="wishlist.Items.length > 0">
+    <li *ngFor="let item of wishlist.Items">
+        <button type="button" class="btn btn-default" aria-label="Left Align" (click)="deleteItem(item)">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"> Remove</span>
+        </button>
+        {{item}}
+
+    </li>
+</ul>
+
+<form class="form-horizontal" [formGroup]="addToWishlistForm" (ngSubmit)="addToWishlist($event)">
+    <input class="form-control" formControlName="item" type="text" placeholder="What to add?">
+    <button class="btn btn-default" type="submit">Add to wishlist</button>
+</form>
+</div>
+
+<hr/>
+<button routerLink="/" routerLinkActive="active" class="btn btn-default">Back to dashboard</button>

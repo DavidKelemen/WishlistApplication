@@ -1,0 +1,30 @@
+<div class="container">
+<h1>Welcome to Wishlist!</h1>
+
+<hr/>
+<p *ngIf="!loggedInUser">Available users you may log in as: </p>
+<p *ngIf="loggedInUser">Click a user below to see their wishlist!</p>
+<ul>
+    <li *ngFor="let item of data | async">
+        <a *ngIf="loggedInUser && loggedInUser.name != item.name" routerLink="/wishlist/{{item.name}}" routerLinkActive="active">{{item.name}}</a>
+        <span *ngIf="!loggedInUser">{{item.name}}</span>
+    </li>
+</ul>
+<hr/>
+
+<p>Or you could create your own user! Your choice!</p>
+<form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="login($event)">
+    <div class="form-group">
+        <input class="form-control"  formControlName="name" type="text" placeholder="Username">
+        <button *ngIf="!loggedInUser" type="submit" class="btn btn-default">Log in / Register</button>
+        <button *ngIf="loggedInUser" type="submit" class="btn btn-default">Change user</button>
+    </div>
+</form>
+
+    <div class="bg-success" *ngIf="loggedInUser">
+        <h1>Logged in as {{loggedInUser.name}}</h1>
+        <a class="btn btn-success" routerLink="/wishlist" routerLinkActive="active">
+            See my Wishlist
+        </a>
+    </div>
+</div>

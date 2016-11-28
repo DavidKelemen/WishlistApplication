@@ -1,0 +1,24 @@
+<h1>{{name}}'s Wishlist!</h1>
+<h3 *ngIf="loggedInUser">Logged in as: {{loggedInUser.name}}</h3>
+<hr/>
+
+<ul data-wishlist *ngIf="wishlist.ReservableItems.length > 0">
+    <li *ngFor="let item of wishlist.ReservableItems">
+        <button *ngIf="!item.isReserved && loggedInUser" type="button" class="btn btn-default" aria-label="Left Align" (click)="setReserved(item)">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"> Click to reserve! </span>
+        </button>
+
+        <button *ngIf="item.isReserved && loggedInUser" disabled type="button" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"> Reserved! </span>
+        </button>
+
+        <button *ngIf="!loggedInUser" disabled type="button" class="btn btn-warning" aria-label="Left Align">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"> Please log in! </span>
+        </button>
+        {{item.itemName}}
+    </li>
+</ul>
+
+<hr/>
+
+<button routerLink="/" routerLinkActive="active" class="btn btn-default">Back to dashboard</button>
